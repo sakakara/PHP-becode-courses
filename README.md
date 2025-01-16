@@ -1,4 +1,4 @@
-# BeCode PHP Courses (tidjee-dev)
+# BeCode PHP Courses (sakakara)
 
 ## Description
 
@@ -23,7 +23,7 @@ This repository contains my PHP course projects from BeCode.
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/tidjee-dev/PHP-becode-courses.git
+   git clone https://github.com/sakakara/PHP-becode-courses.git
    cd PHP-becode-courses
    ```
 
