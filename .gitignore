@@ -1,0 +1,9 @@
+# Files
+.env
+composer.lock
+
+# Directories
+build/
+data/
+node_modules/
+vendor/

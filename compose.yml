@@ -1,0 +1,57 @@
+services:
+  ###> PHP APACHE ###
+  apache:
+    build: ./docker/php-apache
+    container_name: becode-php-app
+    restart: on-failure
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - mysql
+      - phpmyadmin
+      - adminer
+  ###< PHP APACHE ###
+
+  ###> MYSQL ###
+  mysql:
+    image: mysql
+    container_name: becode-php-mysql
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+  ###< MYSQL ###
+
+  ###> PHPMYADMIN ###
+  phpmyadmin:
+    # image: phpmyadmin/phpmyadmin
+    build: ./docker/phpmyadmin
+    container_name: becode-php-phpmyadmin
+    restart: on-failure
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - mysql
+  ###< PHPMYADMIN ###
+
+  ###> ADMINER ###
+  adminer:
+    image: adminer
+    container_name: becode-php-adminer
+    restart: on-failure
+    ports:
+      - "8082:8080"
+    environment:
+      ADMINER_DESIGN: "hydra"
+    depends_on:
+      - mysql
+  ###< ADMINER ###
